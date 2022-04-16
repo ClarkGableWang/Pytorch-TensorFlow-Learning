@@ -275,7 +275,7 @@ def _init_vit_weights(m):
     :param m: module
     """
     if isinstance(m, nn.Linear):
-        nn.init.trunc_normal_(m.weight, std=.01)
+        nn.init.trunc_normal_(m.weight, std=0.01)
         if m.bias is not None:
             nn.init.zeros_(m.bias)
     elif isinstance(m, nn.Conv2d):
@@ -283,8 +283,8 @@ def _init_vit_weights(m):
         if m.bias is not None:
             nn.init.zeros_(m.bias)
     elif isinstance(m, nn.LayerNorm):
-        nn.init.zeros_(m.bias)
         nn.init.ones_(m.weight)
+        nn.init.zeros_(m.bias)        
 
 
 def vit_base_patch16_224(num_classes: int = 1000):
